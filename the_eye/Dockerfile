@@ -6,7 +6,7 @@ WORKDIR /app/the_eye
 ENV PYTHONPATH="/app/"
 
 COPY requirements.txt /app/the_eye
-RUN pip install PyMySQL
+RUN pip install PyMySQL==1.0.2
 RUN pip install -r requirements.txt
 
 COPY . /app/the_eye
