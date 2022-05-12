@@ -1,0 +1,20 @@
+version: "2"
+
+services:
+  app:
+    build: ./the_eye
+    links:
+      - db
+    ports:
+      - "5000:5000"
+    volumes:
+      - ./the_eye:/app/the_eye
+
+  db:
+    image: mysql:5.7
+    ports:
+      - "32000:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: theeye123
+    volumes:
+      - ./scripts/db:/docker-entrypoint-initdb.d/:ro
