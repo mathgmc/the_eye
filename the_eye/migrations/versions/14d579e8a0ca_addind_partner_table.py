@@ -19,7 +19,7 @@ def upgrade():
     op.create_table('partner',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('name', sa.String(length=50), nullable=False),
-    sa.Column('api_token', sa.String(length=32), nullable=False),
+    sa.Column('api_token', sa.String(length=36), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_partner_api_token'), 'partner', ['api_token'], unique=True)
