@@ -11,7 +11,7 @@ class EventCategory(Enum):
 
 class PostEventSchema(BaseModel):
     session_id: str
-    category: EventCategory
+    category: str
     name: str
     data: dict
     timestamp: datetime
@@ -25,4 +25,10 @@ class PostEventSchema(BaseModel):
     @validator("session_id")
     def session_id_validator(cls, value):
         UUID4(value)
+        return value
+
+    @validator("category")
+    def session_id_validator(cls, value):
+        # Keeping this field as str to easily add to the database
+        EventCategory(value)
         return value
