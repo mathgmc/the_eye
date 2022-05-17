@@ -1,15 +1,16 @@
 import logging
 import threading
 
-from the_eye.model import Event
+from the_eye.model import Event, Partner
 
 
 class AddEventHandler(threading.Thread):
-    def __init__(self, event: dict):
+    def __init__(self, event: dict, partner: Partner):
         self._event = event
+        self._partner = partner
         threading.Thread.__init__(self)
 
-    def _create_event_response_handler(self, code):
+    def _create_event_response_handler(self, code: int):
         code_handler = {
             201: lambda x: x,  # Should not do anything
             400: lambda x: logging.warning(f"Data Error while creating event: {x}"),
@@ -25,5 +26,5 @@ class AddEventHandler(threading.Thread):
             )
 
     def run(self):
-        code = Event.create_event(**self._event)
+        code = Event.create_event(**self._event, partner_id=self._partner.id)
         self._create_event_response_handler(code)

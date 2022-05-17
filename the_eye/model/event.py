@@ -12,6 +12,7 @@ class Event(db.Model):
     name = db.Column(db.String(32), nullable=False, index=True)
     data = db.Column(JSON, nullable=False)
     timestamp = db.Column(db.DateTime, nullable=False)
+    partner_id = db.Column(db.Integer, db.ForeignKey("partner.id"), nullable=False)
 
     @classmethod
     def create_event(cls, **kwargs):

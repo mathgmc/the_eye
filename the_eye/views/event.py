@@ -11,5 +11,5 @@ event_blueprint = Blueprint("event", __name__, url_prefix="/event")
 @validate_schema(PostEventSchema, DefaultOutputSchema)
 @login_required
 def post_event(partner: Partner, data: PostEventSchema):
-    AddEventHandler(data.dict()).start()
+    AddEventHandler(data.dict(), partner=partner).start()
     return {"message": "Processing event"}, 200
