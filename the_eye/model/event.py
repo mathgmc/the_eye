@@ -1,7 +1,6 @@
-from werkzeug.exceptions import NotFound
-from sqlalchemy.exc import IntegrityError
+import logging
 from sqlalchemy.types import JSON
-
+from sqlalchemy.exc import DataError
 from the_eye.settings.config import db
 
 
@@ -16,13 +15,14 @@ class Event(db.Model):
 
     @classmethod
     def create_event(cls, **kwargs):
-        func_error = "Error while trying to create event -"
         try:
             event = Event(**kwargs)
             db.session.add(event)
             db.session.commit()
-            return "Success", 201
-        except AssertionError as e:
-            return f"{func_error} {e}", 400
+            return 201
+        except DataError as e:
+            logging.error(e.orig)
+            return 400
         except Exception as e:
-            return f"{func_error} {e}", 500
+            logging.error(e)
+            return 500
