@@ -1,4 +1,5 @@
 from functools import wraps
+import logging
 from flask import request, make_response
 from werkzeug.exceptions import Unauthorized
 from pydantic.error_wrappers import ValidationError
@@ -21,6 +22,9 @@ def validate_schema(input_model=None, output_model=None):
                 else:
                     return make_response(response, status)
             except ValidationError as e:
+                logging.warning(
+                    f"Validation error - {e}; For envent: {request.get_json()}"
+                )
                 return make_response(f"Validation error - {e}", 400)
 
         return wrapped
