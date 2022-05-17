@@ -1,7 +1,9 @@
 from functools import wraps
-
-from flask import abort, request, make_response
+from flask import request, make_response
+from werkzeug.exceptions import Unauthorized
 from pydantic.error_wrappers import ValidationError
+
+from the_eye.model import Partner
 
 
 def validate_schema(input_model=None, output_model=None):
@@ -24,3 +26,22 @@ def validate_schema(input_model=None, output_model=None):
         return wrapped
 
     return callable
+
+
+def login_required(f):
+    @wraps(f)
+    def decorated_function(*args, **kws):
+        if "Authorization" in request.headers:
+            token = request.headers["Authorization"]
+            partner = Partner.get_partner(token)
+
+            if not partner:
+                raise Unauthorized("You need a valid token to access this route")
+            if partner == -1:
+                raise Unauthorized("Error trying to query your token")
+
+            return f(partner, *args, **kws)
+
+        raise Unauthorized("You need a valid token to access this route")
+
+    return decorated_function

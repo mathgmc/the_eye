@@ -12,8 +12,8 @@ class Partner(db.Model):
     def get_partner(cls, api_token):
         try:
             partner = Partner.query.filter_by(api_token=api_token).first()
-            return partner, 200
+            return partner
         except NotFound as e:
-            return None, 404
+            return None
         except Exception as e:
-            return None, 500
+            return -1
