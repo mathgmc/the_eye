@@ -1,6 +1,5 @@
-from the_eye.model.partner import Partner
 from the_eye.settings import app, db
-from the_eye.views.event import event_blueprint
+from the_eye.views import event_blueprint
 
 
 @app.route("/", methods=["GET"])

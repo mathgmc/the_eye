@@ -28,7 +28,7 @@ class PostEventSchema(BaseModel):
         return value
 
     @validator("category")
-    def session_id_validator(cls, value):
+    def category_validator(cls, value):
         # Keeping this field as str to easily add to the database
         EventCategory(value)
         return value

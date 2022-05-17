@@ -1,11 +1,10 @@
 import logging
 import threading
-from time import sleep
 
-from the_eye.model.event import Event
+from the_eye.model import Event
 
 
-class AddEventhandler(threading.Thread):
+class AddEventHandler(threading.Thread):
     def __init__(self, event: dict):
         self._event = event
         threading.Thread.__init__(self)
