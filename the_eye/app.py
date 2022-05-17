@@ -7,7 +7,7 @@ from the_eye.views.event import event_blueprint
 def index() -> str:
     try:
         db.session.query("SELECT version()")
-        return f"<h1>Every thing works fine! {a.name}</h1>"
+        return f"<h1>Every thing works fine!</h1>"
     except Exception as e:
         return f"<h1>Could not connect with database {e}</h1>"
 
