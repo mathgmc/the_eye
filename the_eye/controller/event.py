@@ -1,7 +1,7 @@
 import logging
 import threading
 
-from the_eye.model import Event, Partner
+from the_eye.models import Event, Partner
 
 
 class AddEventHandler(threading.Thread):

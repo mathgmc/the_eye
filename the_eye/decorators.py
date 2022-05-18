@@ -4,7 +4,7 @@ from flask import request, make_response
 from werkzeug.exceptions import Unauthorized
 from pydantic.error_wrappers import ValidationError
 
-from the_eye.model import Partner
+from the_eye.models import Partner
 
 
 def validate_schema(input_model=None, output_model=None):

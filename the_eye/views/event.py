@@ -2,7 +2,7 @@ from flask import Blueprint
 from the_eye.controller import AddEventHandler
 from the_eye.decorators import login_required, validate_schema
 from the_eye.schemas import DefaultOutputSchema, PostEventSchema
-from the_eye.model import Partner
+from the_eye.models import Partner
 
 event_blueprint = Blueprint("event", __name__, url_prefix="/event")
 
