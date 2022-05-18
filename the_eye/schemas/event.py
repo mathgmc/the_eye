@@ -21,6 +21,7 @@ class PostEventSchema(BaseModel):
 
     @validator("session_id")
     def session_id_validator(cls, value):
+        # Keeping this field as str to easily add to the database
         UUID4(value)
         return value
 
